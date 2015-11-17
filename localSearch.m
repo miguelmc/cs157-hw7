@@ -11,3 +11,38 @@ function x=localSearch(funcToOptimize,proposalFunc,startingX,epsilon,lowerBoundO
 % not make it worse by more than epsilon. The routine terminates when timeDelta
 % seconds have passed without the best value found so far of funcToOptimize
 % improving by funcDelta.
+
+
+startTime = now * 60 * 60 * 24;
+startFuncVal = funcToOptimize(startingX);
+
+currX = startingX;
+prevX = inf;
+prevFuncVal = inf;
+
+while 1
+    prevX = currX;
+    currX = proposalFunc(currX);   
+
+    % Round to the bounds.
+    if currX < lowerBoundOnX, currX = lowerBoundOnX; end
+    if currX > upperBoundOnX, currX = upperBoundOnX; end
+
+    prevFuncVal = currRes;
+    currRes = funcToOptimize(xp);
+
+    if currRes + epsilon <= prevFuncVal
+        % accepted, just continue
+    else
+        % TODO: rejected. Not sure what to do here
+    end
+    
+    if startFuncVal - currRes >= funcDelta
+        x = currRes;
+        break;
+    end
+
+    % See if time limit exceded.
+    currTime = now * 60 * 60 * 24;
+    if currTime - startTime >= timeDelta, break, end
+end
