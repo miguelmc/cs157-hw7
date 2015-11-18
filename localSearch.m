@@ -34,6 +34,8 @@ while 1
 
     if currRes + epsilon <= prevFuncVal
         % accepted, just continue
+        % print value if proposal is accepted (per hint on handout)
+        func(x)
     else
         % TODO: rejected. Not sure what to do here
     end
