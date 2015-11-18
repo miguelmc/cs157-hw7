@@ -19,6 +19,7 @@ startFuncVal = funcToOptimize(startingX);
 currX = startingX;
 prevX = inf;
 prevFuncVal = inf;
+currRes = startFuncVal;
 
 while 1
     prevX = currX;
@@ -37,8 +38,8 @@ while 1
         % TODO: rejected. Not sure what to do here
     end
     
-    if startFuncVal - currRes >= funcDelta
-        x = currRes;
+    if prevFuncVal - currRes >= funcDelta
+        currX = currRes;
         break;
     end
 
