@@ -39,7 +39,7 @@ while 1
     currFuncVal = funcToOptimize(currX);
     
 
-    if currFuncVal + epsilon <= prevFuncVal
+    if currFuncVal <= prevFuncVal + epsilon
         % accepted, just continue
         % print value if proposal is accepted (per hint on handout)
 %         disp(currFuncVal)
