@@ -14,38 +14,50 @@ function x=localSearch(funcToOptimize,proposalFunc,startingX,epsilon,lowerBoundO
 
 
 startTime = now * 60 * 60 * 24;
-startFuncVal = funcToOptimize(startingX);
-
 currX = startingX;
 prevX = inf;
 prevFuncVal = inf;
-currRes = startFuncVal;
+startFuncVal = funcToOptimize(startingX);
+currFuncVal = startFuncVal;
 
 while 1
     prevX = currX;
+%     disp(currX)
     currX = proposalFunc(currX);   
-
+%     disp(currX)
+    
     % Round to the bounds.
-    if currX < lowerBoundOnX, currX = lowerBoundOnX; end
-    if currX > upperBoundOnX, currX = upperBoundOnX; end
+%     disp(currX)
+    for i = 1: numel(currX)
+        if currX(i) < lowerBoundOnX currX(i) = lowerBoundOnX; end
+        if currX(i) > upperBoundOnX, currX(i) = upperBoundOnX; end
+%         disp(currX(i))
+    end
+%     disp(currX)
+    
+    prevFuncVal = currFuncVal;
+    currFuncVal = funcToOptimize(currX);
+    
 
-    prevFuncVal = currRes;
-    currRes = funcToOptimize(xp);
-
-    if currRes + epsilon <= prevFuncVal
+    if currFuncVal + epsilon <= prevFuncVal
         % accepted, just continue
         % print value if proposal is accepted (per hint on handout)
-        func(x)
+%         disp(currFuncVal)
+        
     else
         % TODO: rejected. Not sure what to do here
+        currFuncVal = prevFuncVal;
+        currX = prevX;
     end
     
-    if prevFuncVal - currRes >= funcDelta
-        currX = currRes;
-        break;
+    if prevFuncVal - currFuncVal >= funcDelta
+        startTime = now * 60 * 60 * 24;
     end
 
     % See if time limit exceded.
     currTime = now * 60 * 60 * 24;
-    if currTime - startTime >= timeDelta, break, end
+    if currTime - startTime >= timeDelta
+        x = currX;
+        break;
+    end
 end
