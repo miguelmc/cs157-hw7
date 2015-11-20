@@ -11,8 +11,6 @@ epsilons=[10000 5000 1000 900 800 700 600 500 400 300 200 100 80 60 40 20 10 5 1
 % 15-20 epsilons, and, when run, optimizes the function to less than 1
 % for eps=epsilons,%loop through values in epsilons <-- must be a row vector
     for i=1:1, %run localSearch for 3 seconds per epsilon, plotting every .3 seconds
-        x0=localSearch(@twop,@wideScaleRandomNoiseMix3Proposal,x0,0.000001,0,-1,1,0.01);
-        figure(100); plot(x0); title(['eps=' num2str(eps)]);drawnow;
+        x0=localSearch(@twop,@wideScaleRandomNoiseMix3Proposal,x0,0.00001,-1,1,10,0.01);
     end
-    twop(x0);
 % end
