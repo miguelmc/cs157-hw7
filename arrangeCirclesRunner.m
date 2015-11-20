@@ -1,4 +1,4 @@
-x0=1000*randn(1,20); %initial guess, unfortunately far from the origin % NOTES FROM TA: write your own proposal functions; print out 41??
+x0=1:20; %initial guess, unfortunately far from the origin % NOTES FROM TA: write your own proposal functions; print out 41??
 % try changing eplision 
 %arrangeCirclesRunner
 %arrangeCircles(x0)
@@ -8,9 +8,54 @@ x0=1000*randn(1,20); %initial guess, unfortunately far from the origin % NOTES F
 % pick a "schedule" for epsilon, that starts high, ends low, has perhaps
 % 15-20 epsilons, and, when run, optimizes the function to less than 1
 %for eps=epsilons,%loop through values in epsilons <-- must be a row vector
-    for i=1:1, %run localSearch for 3 seconds per epsilon, plotting every .3 seconds
-        x0=localSearch(@arrangeCircles,@circlesMixAll,(1:20),50,0,100,10,0.01);
-        figure(100); plot(x0); title(['eps=' num2str(eps)]);drawnow;
-    end
-    arrangeCircles(x0);
+%     for i=1:1, %run localSearch for 3 seconds per epsilon, plotting every .3 seconds
+        minx0 = 0;
+        x0=localSearch(@arrangeCircles,@wideScaleRandomNoiseMix3Proposal,x0,10,0,50,5,10);
+%         arrangeCircles(x0)
+        x0=localSearch(@arrangeCircles,@circles5,x0,0,0,50,3,1);
+        x0=localSearch(@arrangeCircles,@circles8,x0,0,0,50,3,1);
+
+%         arrangeCircles(x0)
+        minx0 =x0;
+        
+        x0=localSearch(@arrangeCircles,@wideScaleRandomNoiseMix3Proposal,minx0,10,0,40,5,10);
+%         arrangeCircles(x0)
+        x0=localSearch(@arrangeCircles,@circles5,x0,0,0,50,3,1);
+%         arrangeCircles(x0)
+        if arrangeCircles(x0) < arrangeCircles(minx0)
+            minx0 = x0;
+        end
+        
+        x0=localSearch(@arrangeCircles,@wideScaleRandomNoiseMix3Proposal,minx0,10,0,39,5,10);
+%         arrangeCircles(x0)
+        x0=localSearch(@arrangeCircles,@circles5,x0,0,0,50,3,1);
+%         arrangeCircles(x0)
+        if arrangeCircles(x0) < arrangeCircles(minx0)
+            minx0 = x0;
+        end
+        
+        x0=localSearch(@arrangeCircles,@wideScaleRandomNoiseMix3Proposal,minx0,10,0,38,5,10);
+%         arrangeCircles(x0)
+        x0=localSearch(@arrangeCircles,@circles5,x0,0,0,50,3,1);
+%         arrangeCircles(x0)
+        if arrangeCircles(x0) < arrangeCircles(minx0)
+            minx0 = x0;
+        end
+        
+        x0 = minx0;
+%         x0=localSearch(@arrangeCircles,@circles1,x0,0,0,50,3,inf);
+%         arrangeCircles(x0)
+%         x0=localSearch(@arrangeCircles,@circles2,x0,0,0,50,3,inf);
+%         arrangeCircles(x0)
+%         x0=localSearch(@arrangeCircles,@circles7,x0,0,0,50,3,1);
+%         arrangeCircles(x0)
+%         x0=localSearch(@arrangeCircles,@circles8,x0,0,0,50,3,1);
+%         arrangeCircles(x0)
+        
+
+        %        x0=localSearch(@arrangeCircles,@circlesMixAll,x0,10,0,100,10,0.01);
+        %figure(100); plot(x0); title(['eps=' num2str(eps)]);drawnow;
+%     end
+%     disp(x0)
+arrangeCircles(x0)
 %end
