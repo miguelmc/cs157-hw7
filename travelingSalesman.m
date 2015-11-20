@@ -2,6 +2,8 @@ function total=travelingSalesman(order)
 % Given a permutation of the numbers 1, 2, ..., 100, compute the total distance
 % a "traveling salesman" would take, visiting 100 American cities in this
 % order. Latitude and longitude data is loaded from "cities.mat".
+%notes: to run cities, type locs
+% ans is the distance to travel to all cities (goal is 350)
 
 persistent locs lastCalled
 %error checking:

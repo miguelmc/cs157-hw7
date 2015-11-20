@@ -12,7 +12,11 @@ function x=localSearch(funcToOptimize,proposalFunc,startingX,epsilon,lowerBoundO
 % seconds have passed without the best value found so far of funcToOptimize
 % improving by funcDelta.
 
+% epsilon always you to go up a little bit
+%without an eplison, will always go down 
+% if you havent improved my funcDelta in the time period, then cancel  
 
+% NOTE: store the lowest ever value...!!!!
 startTime = now * 60 * 60 * 24;
 currX = startingX;
 prevX = inf;
