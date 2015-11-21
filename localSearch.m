@@ -12,53 +12,41 @@ function x=localSearch(funcToOptimize,proposalFunc,startingX,epsilon,lowerBoundO
 % seconds have passed without the best value found so far of funcToOptimize
 % improving by funcDelta.
 
-% epsilon always you to go up a little bit
-%without an eplison, will always go down 
-% if you havent improved my funcDelta in the time period, then cancel  
-
-% NOTE: store the lowest ever value...!!!!
 startTime = now * 60 * 60 * 24;
 currX = startingX;
 prevX = inf;
 prevFuncVal = inf;
-startFuncVal = funcToOptimize(startingX);
-currFuncVal = startFuncVal;
+currFuncVal = funcToOptimize(startingX);
 
 while 1
     prevX = currX;
-%     disp(currX)
     currX = proposalFunc(currX);   
-%     disp(currX)
     
     % Round to the bounds.
-%     disp(currX)
     for i = 1: numel(currX)
         if currX(i) < lowerBoundOnX currX(i) = lowerBoundOnX; end
         if currX(i) > upperBoundOnX, currX(i) = upperBoundOnX; end
-%         disp(currX(i))
     end
-%     disp(currX)
     
     prevFuncVal = currFuncVal;
     currFuncVal = funcToOptimize(currX);
     
 
     if currFuncVal <= prevFuncVal + epsilon
-        % accepted, just continue
-        % print value if proposal is accepted (per hint on handout)
-%         disp(currFuncVal)
-        
+        % Accepted, just continue
+        % funcToOptimize(currX);
     else
-        % TODO: rejected. Not sure what to do here
+        % Rejected, revert to what we had before
         currFuncVal = prevFuncVal;
         currX = prevX;
     end
     
+    % Exceeded funcDelta, restart the timer
     if prevFuncVal - currFuncVal >= funcDelta
         startTime = now * 60 * 60 * 24;
     end
 
-    % See if time limit exceded.
+    % See if time limit exceded
     currTime = now * 60 * 60 * 24;
     if currTime - startTime >= timeDelta
         x = currX;
