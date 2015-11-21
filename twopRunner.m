@@ -10,6 +10,17 @@ x0=[ones(2,5) -1*ones(2,5) ones(2,5) -1*ones(2,5)];
 % continue to lower them. We avoid big epsilons since we already have a
 % more or less working initial ground to work with.
 % The only difference from 1.3c is that we use wideScaleRandomNoiseMix3Proposal.
+
+% Parameters to localSearch:
+% startingX: our initial input (as above)
+% epsilon: we decrease the epsilon values because we want to perform fewer 
+% neutral moves as we continue minimizing. 
+% lowerBoundOnX: range correlates to right or left
+% upperBoundOnX: range correlates to right or left
+% timeDelta: chosen on trial and error, we found 5 works well
+% funcDelta: chosen on trial and error, we found that 5 times epsilon works
+% well
+
 epsilons=[.1 .01 .001 .0001 .00001 .000001];
 for eps=epsilons,
     % disp(sprintf('Epsilon %d', eps));

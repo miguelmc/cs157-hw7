@@ -17,7 +17,15 @@ x0=1:20; %initial guess %
 % calls.  We compare the x0 produced by the set than just finished to see
 % if it is the lowest x0 thus far.
 
- 
+% Parameters to localSearch:
+% startingX: our initial input (as above)
+% epsilon: we decrease the epsilon values because we want to perform fewer 
+% neutral moves as we continue minimizing. 
+% lowerBoundOnX: range correlates to right or left
+% upperBoundOnX: range correlates to right or left
+% timeDelta: chosen on trial and error, we found 5 works well
+% funcDelta: chosen on trial and error, we found that 5 times epsilon works
+% well 
 
 % setting minx0 to zero.
 minx0 = 0;
