@@ -4,7 +4,7 @@ function out=circlesHorVertMoveProposal(x)
 % in the horizantol or vertical direction. 
 
 
-% Choosing an element at random. i is used to index into x
+% Choosing an integer at random. i is used to index into x
 i = ceil(rand*20);
 
 % There is a 50/50 chance of adding one or subtracting one from coordinate
@@ -15,7 +15,7 @@ else
     x(i) = x(i) - 1; 
 end
 
-% returning modified array
+% Returning modified array
 out = x;
 
 end

@@ -1,8 +1,11 @@
 function out=tspGreedy(i)
 load cities.mat
 
+% For our initial ordering, we choose the given city i, and then greedily 
+% select the next closest city.   
 x = 1:100;
-currLocIndex = i;%ceil(rand*numel(x));
+currLocIndex = i;
+
 lowestLocIndex = 101;
 lowestDiff=inf;
 
