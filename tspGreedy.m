@@ -1,7 +1,8 @@
-function out=tspGreedy(x)
+function out=tspGreedy(i)
 load cities.mat
 
-currLocIndex = ceil(rand*100);
+x = 1:100;
+currLocIndex = i;%ceil(rand*numel(x));
 lowestLocIndex = 101;
 lowestDiff=inf;
 
