@@ -23,7 +23,7 @@ best = tspGreedy(randperm(100));
 % timeDelta: We start out at 10 seconds to allow more time to find a better
 % and decrease some of the timeDelta's because those functions can find the
 % best more quickly as our path improves
-% funcDelta: 
+% funcDelta: ???
 
 
 % disp('epsilon 5');
